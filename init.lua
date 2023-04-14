@@ -1,38 +1,26 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
-
 Kickstart.nvim is *not* a distribution.
-
 Kickstart.nvim is a template for your own configuration.
   The goal is that you can read every line of code, top-to-bottom, and understand
   what your configuration is doing.
-
   Once you've done that, you should start exploring, configuring and tinkering to
   explore Neovim!
-
   If you don't know anything about Lua, I recommend taking some time to read through
   a guide. One possible example:
   - https://learnxinyminutes.com/docs/lua/
-
   And then you can explore or search through `:help lua-guide`
-
-
 Kickstart Guide:
-
 I have left several `:help X` comments throughout the init.lua
 You should run that command and read that help section for more information.
-
 In addition, I have some `NOTE:` items throughout the file.
 These are for you, the reader to help understand what is happening. Feel free to delete
 them once you know what you're doing, but they should serve as a guide for when you
 are first encountering a few different constructs in your nvim config.
-
 I hope you enjoy your Neovim journey,
 - TJ
-
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
 
@@ -187,6 +175,10 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
+require('dap-python').setup('/usr/local/bin/python')
+local widgets = require('dap.ui.widgets')
+local my_sidebar = widgets.sidebar(widgets.scopes)
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
@@ -281,6 +273,18 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+
+-- for debug python
+vim.keymap.set('n', '<F5>', function() require('dap').continue() my_sidebar.open() end)
+vim.keymap.set('n', '<leader>s', function() require('dap').step_over() end)
+vim.keymap.set('n', '<leader>i', function() require('dap').step_into() end)
+vim.keymap.set('n', '<leader>o', function() require('dap').step_out() end)
+vim.keymap.set('n', '<leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>B', function() require('dap').set_breakpoint() end)
+vim.keymap.set('n', '<leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+vim.keymap.set('n', '<leader>dr', function() require('dap').repl.open() end)
+vim.keymap.set('n', '<leader>dl', function() require('dap').run_last() end)
+
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -407,7 +411,7 @@ end
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
