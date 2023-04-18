@@ -174,10 +174,8 @@ require('lazy').setup({
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
   { import = 'custom.plugins' },
 }, {})
-
-require('dap-python').setup('/usr/local/bin/python')
-local widgets = require('dap.ui.widgets')
-local my_sidebar = widgets.sidebar(widgets.scopes)
+vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+vim.keymap.set('n', '<leader>f', "<cmd> Neotree toggle <cr>" ,{ desc = '[?] Find recently opened files' })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
