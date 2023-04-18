@@ -162,7 +162,7 @@ require('lazy').setup({
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -273,17 +273,6 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-
--- for debug python
-vim.keymap.set('n', '<F5>', function() require('dap').continue() my_sidebar.open() end)
-vim.keymap.set('n', '<leader>s', function() require('dap').step_over() end)
-vim.keymap.set('n', '<leader>i', function() require('dap').step_into() end)
-vim.keymap.set('n', '<leader>o', function() require('dap').step_out() end)
-vim.keymap.set('n', '<leader>b', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<leader>B', function() require('dap').set_breakpoint() end)
-vim.keymap.set('n', '<leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<leader>dr', function() require('dap').repl.open() end)
-vim.keymap.set('n', '<leader>dl', function() require('dap').run_last() end)
 
 
 -- [[ Configure Treesitter ]]
