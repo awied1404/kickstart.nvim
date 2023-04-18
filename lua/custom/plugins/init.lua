@@ -3,7 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  "nvim-neo-tree/neo-tree.nvim",
+  {"nvim-neo-tree/neo-tree.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -267,6 +267,17 @@ return {
       })
 
       vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-    end
+    end},
+
+
+  {"folke/todo-comments.nvim",
+    dependencies= "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end}
 }
 
